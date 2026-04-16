@@ -1,0 +1,226 @@
+/* 1. ROOT VARIABLES - Refined for a polished Navy/Blue/Grey palette */
+:root {
+    --navy: #1b2a41; 
+    --deep-blue: #324a5f;
+    --muted-blue: #5c7b99;
+    --soft-blue: #d6e4f0;
+    --light-grey: #f4f7f6;
+    --border-grey: #e0e5ec;
+    --text-grey: #556070;
+    --white: #ffffff;
+    --link-hover: #1b2a41;
+    --transition: all 0.35s ease-in-out;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--light-grey);
+    color: var(--text-grey);
+    line-height: 1.8;
+    font-size: 16px;
+    overflow-x: hidden; /* Prevents whole-page scrolling */
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Playfair Display', serif;
+    color: var(--navy);
+    margin-top: 0;
+    letter-spacing: 0.5px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+p {
+    margin-bottom: 20px;
+}
+
+a {
+    color: var(--muted-blue);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+a:hover {
+    color: var(--link-hover);
+}
+
+/* 3. FULL-WIDTH LAYOUT STRUCTURE (GRID) */
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr; /* Set to single full-width column */
+    grid-template-areas:
+        "header"
+        "nav"
+        "main"
+        "footer"; /* `aside` (Related Links) is removed entirely */
+    gap: 25px;
+    padding: 20px;
+    max-width: 1300px;
+    margin: 0 auto; /* Centers the whole website on giant screens */
+}
+
+/* 4. COMPONENT POLISH */
+.header { 
+    grid-area: header; 
+    text-align: center; 
+    background: var(--white); 
+    padding: 50px 20px 30px; 
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    border-bottom: 5px solid var(--navy);
+}
+
+.header .intro {
+    font-size: 1.1rem;
+    color: var(--text-grey);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.main { 
+    grid-area: main; 
+    background: var(--white); 
+    padding: 40px; 
+    border-radius: 16px; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03); 
+    width: 100%; /* Force full width within the grid */
+}
+
+/* The .aside and Related Links rules have been removed entirely */
+
+.footer { 
+    grid-area: footer; 
+    text-align: center; 
+    padding: 30px; 
+    color: var(--text-grey); 
+    font-size: 0.9em;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* 5. NAVIGATION - ALWAYS HORIZONTAL BAR */
+.nav { 
+    grid-area: nav; 
+}
+
+.navigation {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row; /* Horizontal layout */
+    justify-content: center; /* Center the links */
+    flex-wrap: wrap; /* Wraps on tiny cell phones */
+    gap: 15px;
+}
+
+.navigation a {
+    display: block;
+    padding: 12px 25px;
+    background: var(--white);
+    color: var(--deep-blue);
+    border: 1px solid var(--border-grey);
+    border-radius: 30px;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+
+.navigation a:hover, .navigation a.active {
+    background: var(--navy);
+    color: var(--white);
+    border-color: var(--navy);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(27, 42, 65, 0.15);
+}
+
+/* 6. GALLERY SYSTEM (SCROLL SNAP) */
+.scroll-gallery {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 30px; /* Space between photos */
+    padding: 15px 0 30px 0;
+    cursor: grab;
+    width: 100%; /* Keeps gallery inside the main container */
+    margin: 0 auto 30px auto; /* Centering rules */
+}
+
+.scroll-gallery::-webkit-scrollbar { height: 10px; }
+.scroll-gallery::-webkit-scrollbar-track { background: var(--light-grey); border-radius: 10px; }
+.scroll-gallery::-webkit-scrollbar-thumb { background: var(--muted-blue); border-radius: 10px; }
+
+.gallery-item {
+    flex: 0 0 75%; /* Forces full image with a peak of the next */
+    scroll-snap-align: center;
+    margin: 0;
+    display: flex; /* Centers image/text column horizontally */
+    flex-direction: column;
+    align-items: center;
+}
+
+.gallery-item img {
+    width: 100%; /* Take up all available width within the flexible box */
+    height: auto; /* Shrinks/Grows perfectly with no vertical gap */
+    max-width: 450px; /* Restricts narrow graphics from stretching */
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+.gallery-item figcaption {
+    margin-top: 15px;
+    text-align: center;
+    font-style: italic;
+    color: var(--text-grey);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+}
+
+/* 7. PAGE-SPECIFIC HIGHLIGHTS */
+.home-page .main { border-top: 8px solid var(--muted-blue); }
+.design-page .main { border-top: 8px solid var(--navy); }
+.art-page .main { border-top: 8px solid var(--deep-blue); }
+.hobbies-page .main { border-top: 8px solid var(--soft-blue); }
+
+.large-profile-image {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 6px solid var(--soft-blue);
+    display: block;
+    margin: 0 auto 30px auto;
+    box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+
+}
+
+/* 8. RESPONSIVE LAYOUT (Simple single-column everywhere now) */
+@media (min-width: 900px) {
+    .wrapper {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "header"
+            "nav"
+            "main"
+            "footer";
+        gap: 25px;
+    }
+
+#special-image {
+  transition: transform 0.3s ease;
+}
+
+#special-image:hover {
+  transform: scale(1.1);
+}
